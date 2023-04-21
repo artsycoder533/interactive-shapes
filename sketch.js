@@ -208,12 +208,12 @@ class Shape {
     }
     if (tri.checked()) {
       triangle(
-        this.x - this.r,
-        this.y + this.r,
-        this.x + this.r,
-        this.y + this.r,
+        this.x - (1.5 * this.r),
+        this.y + (1.5 * this.r),
+        this.x + (1.5 * this.r),
+        this.y + (1.5 * this.r),
         this.x,
-        this.y - this.r
+        this.y - (1.5 * this.r)
       );
     }
   }
