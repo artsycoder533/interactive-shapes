@@ -1,5 +1,6 @@
 let shapes = [];
 let weight = 10;
+let velocity = 3;
 let count = 20;
 let circle;
 let square;
@@ -20,27 +21,42 @@ function setup() {
   sidePanel.style("z-index", "1");
 
   // stroke width slider
-  slider = createSlider(0, 10, width, 1);
-  slider.parent(sidePanel);
-  slider.position(40, 60);
-  slider.style("width", "125px");
-  slider.style("z-index", "2");
+  strokeWidthSlider = createSlider(0, 20, weight, 1);
+  strokeWidthSlider.parent(sidePanel);
+  strokeWidthSlider.position(10, 50);
+  strokeWidthSlider.style("width", "125px");
+  strokeWidthSlider.style("z-index", "2");
+
+  //stroke width label
+  let velocityLabel = createP("Velocity:");
+  velocityLabel.style("position", "absolute");
+  velocityLabel.style("top", "70px");
+  velocityLabel.style("left", "10px");
+  velocityLabel.style("font-size", "18px");
+  velocityLabel.style("color", "#000");
+  velocityLabel.style("z-index", "3");
+
+  // move slider
+  velocitySlider = createSlider(0, 20, velocity, 1);
+  velocitySlider.parent(sidePanel);
+  velocitySlider.position(10, 110);
+  velocitySlider.style("width", "125px");
+  velocitySlider.style("z-index", "2");
 
   //stroke width label
   let strokeWidthLabel = createP("Stroke Width:");
   strokeWidthLabel.style("position", "absolute");
   strokeWidthLabel.style("top", "10px");
-  strokeWidthLabel.style("left", "40px");
+  strokeWidthLabel.style("left", "10px");
   strokeWidthLabel.style("font-size", "18px");
   strokeWidthLabel.style("color", "#000");
   strokeWidthLabel.style("z-index", "3");
-  // strokeWidthLabel.style("background-color", "#fff");
 
   // shape label
   let shape = createP("Choose Shape:");
   shape.style("position", "absolute");
   shape.style("top", "120px");
-  shape.style("left", "40px");
+  shape.style("left", "10px");
   shape.style("font-size", "18px");
   shape.style("color", "#000");
   shape.style("z-index", "3");
@@ -48,17 +64,17 @@ function setup() {
   //checkboxes
   circle = createCheckbox("Circle", true);
   circle.changed(clearInactiveCheckbox.bind(circle));
-  circle.position(40, 170);
+  circle.position(10, 170);
   circle.style("z-index", "3");
 
   square = createCheckbox("Square", false);
   square.changed(clearInactiveCheckbox.bind(square));
-  square.position(40, 200);
+  square.position(10, 200);
   square.style("z-index", "3");
 
   tri = createCheckbox("Triangle", false);
   tri.changed(clearInactiveCheckbox.bind(tri));
-  tri.position(40, 230);
+  tri.position(10, 230);
   tri.style("z-index", "3");
 
   //reset canvas button
@@ -67,14 +83,14 @@ function setup() {
   button.style("z-index", "3");
   button.mousePressed(refillShapesArray);
 
-    // shape label
-    let directions = createP("*Mouseover changes fill!");
-    directions.style("position", "absolute");
-    directions.style("top", "320px");
-    directions.style("left", "10px");
-    directions.style("font-size", "18px");
-    directions.style("color", "#000");
-    directions.style("z-index", "3");
+  // shape label
+  let directions = createP("*Mouseover changes fill!");
+  directions.style("position", "absolute");
+  directions.style("top", "320px");
+  directions.style("left", "10px");
+  directions.style("font-size", "18px");
+  directions.style("color", "#000");
+  directions.style("z-index", "3");
 
   //create and add new shape to shapes array
   for (let i = 0; i < count; i++) {
@@ -88,7 +104,8 @@ function setup() {
 
 function draw() {
   background(0);
-  weight = slider.value();
+  weight = strokeWidthSlider.value();
+  velocity = velocitySlider.value();
   //check if you have moused over a shape
   for (let i = 0; i < shapes.length; i++) {
     if (shapes[i].contains(mouseX, mouseY)) {
@@ -174,8 +191,8 @@ class Shape {
   }
 
   move() {
-    this.x = this.x + random(-3, 3);
-    this.y = this.y + random(-3, 3);
+    this.x = this.x + random(-Math.abs(velocity), velocity);
+    this.y = this.y + random(-Math.abs(velocity), velocity);
   }
 
   show() {
