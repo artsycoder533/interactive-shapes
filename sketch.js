@@ -2,7 +2,7 @@ let shapes = [];
 let weight = 10;
 let count = 20;
 let circle;
-let rectangle;
+let square;
 let tri;
 let button;
 
@@ -51,10 +51,10 @@ function setup() {
   circle.position(40, 170);
   circle.style("z-index", "3");
 
-  rectangle = createCheckbox("Rectangle", false);
-  rectangle.changed(clearInactiveCheckbox.bind(rectangle));
-  rectangle.position(40, 200);
-  rectangle.style("z-index", "3");
+  square = createCheckbox("Rectangle", false);
+  square.changed(clearInactiveCheckbox.bind(square));
+  square.position(40, 200);
+  square.style("z-index", "3");
 
   tri = createCheckbox("Triangle", false);
   tri.changed(clearInactiveCheckbox.bind(tri));
@@ -122,22 +122,22 @@ function mousePressed() {
 
 //only one checkbox checked at a time
 function clearInactiveCheckbox() {
-  if (circle.checked() && !rectangle.checked() && !tri.checked()) {
+  if (circle.checked() && !square.checked() && !tri.checked()) {
     return;
   }
-  if (rectangle.checked() && !circle.checked() && !tri.checked()) {
+  if (square.checked() && !circle.checked() && !tri.checked()) {
     return;
   }
-  if (tri.checked() && !circle.checked() && !rectangle.checked()) {
+  if (tri.checked() && !circle.checked() && !square.checked()) {
     return;
   }
   circle.checked(false);
-  rectangle.checked(false);
+  square.checked(false);
   tri.checked(false);
   if (this == circle) {
     circle.checked(true);
   } else if (this == rectangle) {
-    rectangle.checked(true);
+    square.checked(true);
   } else if (this == tri) {
     tri.checked(true);
   }
@@ -176,7 +176,7 @@ class Shape {
     if (circle.checked()) {
       ellipse(this.x, this.y, this.r * 3);
     }
-    if (rectangle.checked()) {
+    if (square.checked()) {
       rectMode(CENTER);
       rect(this.x, this.y, this.r * 2, this.r * 2);
     }
