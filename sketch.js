@@ -200,20 +200,20 @@ class Shape {
     strokeWeight(weight);
     fill(this.color);
     if (circle.checked()) {
-      ellipse(this.x, this.y, this.r * 3);
+      ellipse(this.x, this.y, this.r * 3.5);
     }
     if (square.checked()) {
       rectMode(CENTER);
-      rect(this.x, this.y, this.r * 2, this.r * 2);
+      rect(this.x, this.y, this.r * 2.5, this.r * 2.5);
     }
     if (tri.checked()) {
       triangle(
-        this.x - (1.5 * this.r),
-        this.y + (1.5 * this.r),
-        this.x + (1.5 * this.r),
-        this.y + (1.5 * this.r),
+        this.x - (1.75 * this.r),
+        this.y + (1.75 * this.r),
+        this.x + (1.75 * this.r),
+        this.y + (1.75 * this.r),
         this.x,
-        this.y - (1.5 * this.r)
+        this.y - (1.75 * this.r)
       );
     }
   }
