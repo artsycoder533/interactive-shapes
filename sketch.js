@@ -51,7 +51,7 @@ function setup() {
   circle.position(40, 170);
   circle.style("z-index", "3");
 
-  square = createCheckbox("Rectangle", false);
+  square = createCheckbox("Square", false);
   square.changed(clearInactiveCheckbox.bind(square));
   square.position(40, 200);
   square.style("z-index", "3");
@@ -66,6 +66,15 @@ function setup() {
   button.position(40, 275);
   button.style("z-index", "3");
   button.mousePressed(refillShapesArray);
+
+    // shape label
+    let directions = createP("*Mouseover changes fill!");
+    directions.style("position", "absolute");
+    directions.style("top", "320px");
+    directions.style("left", "10px");
+    directions.style("font-size", "18px");
+    directions.style("color", "#000");
+    directions.style("z-index", "3");
 
   //create and add new shape to shapes array
   for (let i = 0; i < count; i++) {
@@ -136,7 +145,7 @@ function clearInactiveCheckbox() {
   tri.checked(false);
   if (this == circle) {
     circle.checked(true);
-  } else if (this == rectangle) {
+  } else if (this == square) {
     square.checked(true);
   } else if (this == tri) {
     tri.checked(true);
